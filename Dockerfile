@@ -3,7 +3,7 @@ FROM python:alpine
 WORKDIR /app
 
 COPY requirements.txt ./
-RUN apk add -U --no-cache build-base && \
+RUN apk add -U --no-cache build-base libffi-dev && \
     pip install --no-cache-dir -r requirements.txt && \
     apk del build-base
 
