@@ -9,8 +9,8 @@ class TextGenerator():
     """
 
     def __init__(self):
-        self.tokenizer = AutoTokenizer.from_pretrained(config["TEXT_GENERATION_MODEL"])
-        self.model = AutoModelForCausalLM.from_pretrained(config["TEXT_GENERATION_MODEL"])
+        self.tokenizer = AutoTokenizer.from_pretrained(config["TEXT_GENERATION_MODEL"], cache_dir=config["MODEL_CACHE_DIR"])
+        self.model = AutoModelForCausalLM.from_pretrained(config["TEXT_GENERATION_MODEL"], cache_dir=config["MODEL_CACHE_DIR"])
         self.generator = pipeline("text-generation", model=self.model, tokenizer=self.tokenizer)
 
     def __call__(self, prompt: str, num_results: int = 1) -> list[str]:

@@ -9,8 +9,8 @@ class ConversationalGenerator():
     """
 
     def __init__(self):
-        self.tokenizer = AutoTokenizer.from_pretrained(config["CONVERSATION_GENERATION_MODEL"])
-        self.model = AutoModelForCausalLM.from_pretrained(config["CONVERSATION_GENERATION_MODEL"])
+        self.tokenizer = AutoTokenizer.from_pretrained(config["CONVERSATION_GENERATION_MODEL"], cache_dir=config["MODEL_CACHE_DIR"])
+        self.model = AutoModelForCausalLM.from_pretrained(config["CONVERSATION_GENERATION_MODEL"], cache_dir=config["MODEL_CACHE_DIR"])
         self.generator = pipeline("conversational", model=self.model, tokenizer=self.tokenizer)
 
     def __call__(self, message: str) -> str:

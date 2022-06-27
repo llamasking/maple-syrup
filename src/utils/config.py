@@ -2,11 +2,11 @@ from dotenv import load_dotenv
 from typing import TypedDict
 from os import getenv
 
-
 # Read config
 load_dotenv()
 
 class ConfigType(TypedDict):
+    MODEL_CACHE_DIR: str | None
     TEXT_GENERATION_MODEL: str
     TEXT_GENERATION_MAXIMUM_RESULTS: int
     CONVERSATION_GENERATION_MODEL: str
@@ -14,6 +14,7 @@ class ConfigType(TypedDict):
     DISCORD_DEBUG_GUILDS: list[int]
 
 config: ConfigType = {
+    "MODEL_CACHE_DIR": getenv("MODEL_CACHE_DIR", default='') or None,
     "TEXT_GENERATION_MODEL": getenv("TEXT_GENERATION_MODEL", default="distilgpt2"),
     "TEXT_GENERATION_MAXIMUM_RESULTS": int(getenv("TEXT_GENERATION_MAXIMUM_RESULTS", default=3)),
     "CONVERSATION_GENERATION_MODEL": getenv("CONVERSATION_GENERATION_MODEL", default="deepparag/Aeona"),

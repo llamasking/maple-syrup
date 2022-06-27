@@ -1,10 +1,5 @@
-from utils.config import config
-
-# Start up Discord bot(s)
-debug_guilds = config["DISCORD_DEBUG_GUILDS"]
-
-# TODO: Move to somewhere else
 import time
+from utils.config import config
 from discord import ApplicationContext, Bot, Embed, InteractionResponse, option
 from generators.TextGenerator import TextGenerator
 from generators.ConversationalGenerator import ConversationalGenerator
@@ -12,7 +7,7 @@ from generators.ConversationalGenerator import ConversationalGenerator
 # Warm up generator
 gpt_generator = TextGenerator()
 conversational_generator = ConversationalGenerator()
-bot = Bot(debug_guilds=debug_guilds)
+bot = Bot(debug_guilds=config["DISCORD_DEBUG_GUILDS"])
 
 @bot.event
 async def on_ready():
