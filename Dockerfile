@@ -4,13 +4,12 @@ WORKDIR /app
 
 COPY requirements.txt ./
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt update && \
-    apt upgrade -y && \
-    apt install -y build-essential cmake cmake-extras git
-RUN pip install --no-cache-dir -r requirements.txt
-RUN apt purge -y build-essential cmake cmake-extras git && \
-    apt clean && \
-    apt autoremove -y --purge; \
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y build-essential cmake cmake-extras git && \
+    pip install --no-cache-dir -r requirements.txt && \
+    apt-get purge -y build-essential cmake cmake-extras git --auto-remove && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 ENV MODEL_CACHE_DIR="/cache" \
