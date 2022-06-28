@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 from typing import TypedDict
 from os import getenv
 
-# Read config
 load_dotenv()
 
 class ConfigType(TypedDict):
@@ -14,9 +13,9 @@ class ConfigType(TypedDict):
     DISCORD_DEBUG_GUILDS: list[int] | None
 
 def get_debug_guilds() -> list[int] | None:
-    environ_debug_guilds = getenv("DISCORD_DEBUG_GUILDS")
-    if environ_debug_guilds:
-        debug_guilds = [ int(e) for e in (environ_debug_guilds.split(",")) ]
+    debug_guilds = getenv("DISCORD_DEBUG_GUILDS")
+    if debug_guilds:
+        return [ int(e) for e in (debug_guilds.split(",")) ]
     return None
 
 config: ConfigType = {
