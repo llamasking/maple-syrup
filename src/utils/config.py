@@ -11,7 +11,13 @@ class ConfigType(TypedDict):
     TEXT_GENERATION_MAXIMUM_RESULTS: int
     CONVERSATION_GENERATION_MODEL: str
     DISCORD_BOT_TOKEN: str
-    DISCORD_DEBUG_GUILDS: list[int]
+    DISCORD_DEBUG_GUILDS: list[int] | None
+
+def get_debug_guilds() -> list[int] | None:
+    environ_debug_guilds = getenv("DISCORD_DEBUG_GUILDS")
+    if environ_debug_guilds:
+        debug_guilds = [ int(e) for e in (environ_debug_guilds.split(",")) ]
+    return None
 
 config: ConfigType = {
     "MODEL_CACHE_DIR": getenv("MODEL_CACHE_DIR", default='') or None,
@@ -19,5 +25,5 @@ config: ConfigType = {
     "TEXT_GENERATION_MAXIMUM_RESULTS": int(getenv("TEXT_GENERATION_MAXIMUM_RESULTS", default=3)),
     "CONVERSATION_GENERATION_MODEL": getenv("CONVERSATION_GENERATION_MODEL", default="deepparag/Aeona"),
     "DISCORD_BOT_TOKEN": getenv("DISCORD_BOT_TOKEN"),
-    "DISCORD_DEBUG_GUILDS": [ int(element) for element in getenv("DISCORD_DEBUG_GUILDS").split(",") ]
+    "DISCORD_DEBUG_GUILDS": get_debug_guilds()
 }
