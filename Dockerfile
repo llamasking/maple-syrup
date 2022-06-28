@@ -1,29 +1,12 @@
-FROM python:alpine
+FROM python:slim
 
 WORKDIR /app
 
 COPY requirements.txt ./
-RUN apk add -U --no-cache \
-    build-base \
-    libffi-dev \
-    abuild \
-    cmake \
-    cmake-extras \
-    extra-cmake-modules \
-    git
-
-RUN pip install --no-cache-dir transformers transformers[torch] && \
-    pip install --no-cache-dir --pre py-cord py-cord[speed] && \
-    pip install --no-cache-dir -r requirements.txt
-
-RUN apk del \
-    build-base \
-    libffi-dev \
-    abuild \
-    cmake \
-    cmake-extras \
-    extra-cmake-modules \
-    git
+#RUN pip install --no-cache-dir transformers transformers[torch] && \
+#    pip install --no-cache-dir --pre py-cord py-cord[speed] && \
+#    pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 ENV MODEL_CACHE_DIR="/cache" \
     TEXT_GENERATION_MODEL="distilgpt2" \
