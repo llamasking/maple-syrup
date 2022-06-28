@@ -9,9 +9,8 @@ RUN apt update && \
     apt install -y build-essential cmake cmake-extras git
 RUN pip install --no-cache-dir -r requirements.txt
 RUN apt purge -y build-essential cmake cmake-extras git && \
-    apt clean -y && \
-    apt autoremove -y && \
-    apt autoclean -y && \
+    apt clean && \
+    apt autoremove -y --purge; \
     rm -rf /var/lib/apt/lists/*
 
 ENV MODEL_CACHE_DIR="/cache" \
