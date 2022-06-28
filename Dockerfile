@@ -7,9 +7,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
     apt upgrade -y && \
     apt install -y build-essential cmake cmake-extras git
-#RUN pip install --no-cache-dir transformers transformers[torch] && \
-#    pip install --no-cache-dir --pre py-cord py-cord[speed] && \
-#    pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 RUN apt purge -y build-essential cmake cmake-extras git && \
     apt clean -y && \
