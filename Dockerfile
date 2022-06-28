@@ -9,7 +9,8 @@ RUN apk add -U --no-cache \
     abuild \
     cmake \
     cmake-extras \
-    extra-cmake-modules
+    extra-cmake-modules \
+    git
 
 RUN pip install --no-cache-dir transformers transformers[torch] && \
     pip install --no-cache-dir --pre py-cord py-cord[speed] && \
@@ -21,7 +22,8 @@ RUN apk del \
     abuild \
     cmake \
     cmake-extras \
-    extra-cmake-modules
+    extra-cmake-modules \
+    git
 
 ENV MODEL_CACHE_DIR="/cache" \
     TEXT_GENERATION_MODEL="distilgpt2" \
