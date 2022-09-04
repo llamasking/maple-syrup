@@ -4,6 +4,7 @@ from os import getenv
 
 load_dotenv()
 
+
 class ConfigType(TypedDict):
     MODEL_CACHE_DIR: str | None
     TEXT_GENERATION_MODEL: str
@@ -12,14 +13,16 @@ class ConfigType(TypedDict):
     DISCORD_BOT_TOKEN: str
     DISCORD_DEBUG_GUILDS: list[int] | None
 
+
 def get_debug_guilds() -> list[int] | None:
     debug_guilds = getenv("DISCORD_DEBUG_GUILDS")
     if debug_guilds:
-        return [ int(e) for e in (debug_guilds.split(",")) ]
+        return [int(e) for e in (debug_guilds.split(","))]
     return None
 
+
 config: ConfigType = {
-    "MODEL_CACHE_DIR": getenv("MODEL_CACHE_DIR", default='') or None,
+    "MODEL_CACHE_DIR": getenv("MODEL_CACHE_DIR") or None,
     "TEXT_GENERATION_MODEL": getenv("TEXT_GENERATION_MODEL", default="distilgpt2"),
     "TEXT_GENERATION_MAXIMUM_RESULTS": int(getenv("TEXT_GENERATION_MAXIMUM_RESULTS", default=3)),
     "CONVERSATION_GENERATION_MODEL": getenv("CONVERSATION_GENERATION_MODEL", default="deepparag/Aeona"),

@@ -2,15 +2,18 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, Conversation, pipe
 from utils.clean_text import clean_text
 from utils.config import config
 
-class ConversationalGenerator():
+
+class ConversationalGenerator:
     """
     Abstraction class allowing for simplified use of the conversational text
     generation model with minimal code needed.
     """
 
     def __init__(self):
-        self.tokenizer = AutoTokenizer.from_pretrained(config["CONVERSATION_GENERATION_MODEL"], cache_dir=config["MODEL_CACHE_DIR"])
-        self.model = AutoModelForCausalLM.from_pretrained(config["CONVERSATION_GENERATION_MODEL"], cache_dir=config["MODEL_CACHE_DIR"])
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            config["CONVERSATION_GENERATION_MODEL"], cache_dir=config["MODEL_CACHE_DIR"])
+        self.model = AutoModelForCausalLM.from_pretrained(
+            config["CONVERSATION_GENERATION_MODEL"], cache_dir=config["MODEL_CACHE_DIR"])
         self.generator = pipeline("conversational", model=self.model, tokenizer=self.tokenizer)
 
     def __call__(self, message: str) -> str:
